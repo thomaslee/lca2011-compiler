@@ -1,0 +1,4 @@
+#!/bin/bash
+
+scala -cp build:lib/bcel.jar lca2011.Compiler "$@"
+

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<project name="lca2011-compiler" default="compile" basedir=".">
+    <property file="build.properties" />
+    <property name="src.dir" value="${basedir}/src" />
+    <property name="build.dir" value="${basedir}/build" />
+    <property name="lib.dir" value="${basedir}/lib" />
+
+    <target name="init">
+        <path id="build.classpath">
+            <pathelement location="${scala.home}/lib/scala-library.jar" />
+            <pathelement location="${build.dir}" />
+            <pathelement location="${lib.dir}/bcel.jar" />
+        </path>
+        <taskdef resource="scala/tools/ant/antlib.xml">
+            <classpath>
+                <pathelement location="${scala.home}/lib/scala-compiler.jar" />
+                <pathelement location="${scala.home}/lib/scala-library.jar" />
+            </classpath>
+        </taskdef>
+    </target>
+
+    <target name="compile" depends="init">
+        <mkdir dir="${build.dir}" />
+        <scalac srcdir="${src.dir}"
+                destdir="${build.dir}"
+                classpathref="build.classpath">
+            <include name="**/*.scala" />
+        </scalac>
+    </target>
+
+    <target name="clean">
+        <delete dir="${build.dir}" />
+    </target>
+</project>
+
